@@ -4,7 +4,7 @@ import { Observable, of, map } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
-  teatro: Teatro;
+  teatro: Teatro; 
 }
 export class Teatro {
   platea: Array<Array<string>>;
