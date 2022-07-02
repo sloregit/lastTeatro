@@ -44,10 +44,10 @@ export class nuovoSpettacolo extends Spettacolo {
   styleUrls: ['./gestione.component.css'],
 })
 export class GestioneComponent implements OnInit {
-  @Input() spettacoli: Observable<Array<Spettacolo>>;
-  @Output() spettacoliChange = new EventEmitter();
+  @Input() spettacoliIn$: Observable<Array<Spettacolo>>;
+  @Output() spettacoliEmitter = new EventEmitter();
+  spettacoli: Array<Spettacolo>;
   newSpettacolo: nuovoSpettacolo;
-  teatro: Teatro;
   nomiSpettacoli: Array<string>;
   nomeSpettacolo: string;
   elemPlatea: Array<number>;
@@ -64,8 +64,6 @@ export class GestioneComponent implements OnInit {
     this.elemPalco = new Array(10);
   }
   conferma() {
-    console.log([this.filePlatea, this.postiPlatea]);
-    console.log([this.filePalco, this.postiPalco]);
     this.newSpettacolo = new nuovoSpettacolo(this.nomeSpettacolo);
     this.newSpettacolo.genera(
       this.filePlatea,
@@ -73,7 +71,8 @@ export class GestioneComponent implements OnInit {
       this.filePalco,
       this.postiPalco
     );
-    console.log(this.newSpettacolo);
+    this.spettacoli.push(this.newSpettacolo);
+    this.spettacoliEmitter.emit(this.spettacoli);
   }
   vediSpettacoli() {
     this.showNomi = true;
@@ -82,7 +81,8 @@ export class GestioneComponent implements OnInit {
     this.showNomi = false;
   }
   ngOnInit() {
-    this.sub = this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
+    this.sub = this.spettacoliIn$.subscribe((spettacoli: Array<Spettacolo>) => {
+      this.spettacoli = spettacoli;
       spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );

@@ -23,7 +23,8 @@ export class AppComponent {
   nomeUtente: string;
   spettacolo: Observable<Spettacolo>;
   rapido: boolean;
-  conferma: string;
+  conferma1: string;
+  conferma2: string;
   sub: Subscription;
   constructor(private TeatroDBService: TeatroDBService) {}
 
@@ -34,7 +35,11 @@ export class AppComponent {
   confermaPrenotazioni() {
     this.spettacolo.subscribe((spettacolo) => console.log(spettacolo));
   }
-
+  aggiornaSpettacoli(spettacoliAggiornati: Array<Spettacolo>) {
+    this.TeatroDBService.SetPrenotazioni$(
+      JSON.stringify(spettacoliAggiornati)
+    ).subscribe((ok) => (this.conferma2 = ok + ': spettacoli aggiornati'));
+  }
   //prenota al click
   spettacoloChange() {
     //OK
@@ -42,7 +47,7 @@ export class AppComponent {
       this.TeatroDBService.SetPrenotazioni$(
         JSON.stringify(spettacoli)
       ).subscribe(
-        (val) => (this.conferma = val + ': ' + this.nomeUtente + ' aggiunto')
+        (val) => (this.conferma1 = val + ': ' + this.nomeUtente + ' aggiunto')
       )
     );
   }
@@ -88,6 +93,7 @@ export class AppComponent {
     this.spettacolo = undefined;
     this.rapido = undefined;
     this.nomeUtente = undefined;
-    this.conferma = undefined;
+    this.conferma1 = undefined;
+    this.conferma2 = undefined;
   }
 }

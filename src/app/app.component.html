@@ -26,7 +26,7 @@
   </div>
 </div>
 <div *ngIf="spettacolo">
-  <p>{{ conferma || nomeUtente + ', seleziona un posto' }}</p>
+  <p>{{ conferma1 || nomeUtente + ', seleziona un posto' }}</p>
   <app-sala-teatro
     [rapido]="rapido"
     [nomeUtente]="nomeUtente"
@@ -35,7 +35,11 @@
   ></app-sala-teatro>
 </div>
 <div *ngIf="admin && spettacoliIn$">
-  <app-gestione [(spettacoli)]="spettacoliIn$"></app-gestione>
+  <app-gestione
+    [spettacoliIn$]="spettacoliIn$"
+    (spettacoliEmitter)="aggiornaSpettacoli($event)"
+  ></app-gestione>
+  <p>{{ conferma2 }}</p>
 </div>
 <button *ngIf="spettacoliIn$ && !spettacolo" (click)="inizio()">
   indietro
