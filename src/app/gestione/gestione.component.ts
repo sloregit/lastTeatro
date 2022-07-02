@@ -17,7 +17,9 @@ export class GestioneComponent implements OnInit {
   constructor() {
     this.nomiSpettacoli = new Array();
   }
-  inInput($event) {}
+  inInput($event) {
+    console.log($event);
+  }
   vediSpettacoli() {
     this.showNomi = true;
   }
