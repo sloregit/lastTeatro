@@ -9,32 +9,21 @@
   <input
     type="text"
     name="nomeSpettacolo"
-    (keyup)="inInput($event)"
-    [ngModel]="nomeSpettacolo"
+    [(ngModel)]="nomeSpettacolo"
     placeholder="inserisci il nome dello spettacolo"
   />
 </form>
 <div>
   <form action="">
     <p>configura la platea</p>
-    <select
-      (change)="seleziona()"
-      [(ngModel)]="filePlatea"
-      name="filePlatea"
-      id=""
-    >
+    <select [(ngModel)]="filePlatea" name="filePlatea" id="">
       <option selected="true" disabled="true" [value]="undefined">file</option>
       <option *ngFor="let file of elemPlatea; let i = index" [ngValue]="i + 1">
         {{ i + 1 }}
       </option>
     </select>
 
-    <select
-      (change)="seleziona()"
-      [(ngModel)]="postiPlatea"
-      name="postiPlatea"
-      id=""
-    >
+    <select [(ngModel)]="postiPlatea" name="postiPlatea" id="">
       <option selected="true" disabled="true" [value]="undefined">posti</option>
       <option *ngFor="let file of elemPlatea; let i = index" [ngValue]="i + 1">
         {{ i + 1 }}
@@ -43,23 +32,13 @@
   </form>
   <form action="">
     <p>configura il palco</p>
-    <select
-      (change)="seleziona()"
-      [(ngModel)]="filePalco"
-      name="filePalco"
-      id=""
-    >
+    <select [(ngModel)]="filePalco" name="filePalco" id="">
       <option selected="true" disabled="true" [value]="undefined">file</option>
       <option *ngFor="let file of elemPalco; let i = index" [ngValue]="i + 1">
         {{ i + 1 }}
       </option>
     </select>
-    <select
-      (change)="seleziona()"
-      [(ngModel)]="postiPlatea"
-      name="postiPlatea"
-      id=""
-    >
+    <select [(ngModel)]="postiPalco" name="postiPalco" id="">
       <option selected="true" disabled="true" [value]="undefined">posti</option>
       <option *ngFor="let file of elemPalco; let i = index" [ngValue]="i + 1">
         {{ i + 1 }}
@@ -67,6 +46,8 @@
     </select>
   </form>
 </div>
+<br />
+<button (click)="conferma()">Conferma</button>
 <br />
 <br />
 <button>indietro</button>
