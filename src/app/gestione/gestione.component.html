@@ -5,5 +5,13 @@
     <p>{{ spettacolo }}</p>
   </div>
 </div>
-
+<form>
+  <input
+    type="text"
+    name="nomeSpettacolo"
+    (keyup)="inInput($event)"
+    [ngModel]="nomeSpettacolo"
+    placeholder="inserisci il nome dello spettacolo"
+  />
+</form>
 <button>indietro</button>

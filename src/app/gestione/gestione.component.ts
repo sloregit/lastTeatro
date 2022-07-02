@@ -11,11 +11,13 @@ export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
   @Output() spettacoliChange = new EventEmitter();
   nomiSpettacoli: Array<string>;
+  nomeSpettacolo: string;
   showNomi: boolean;
   sub: Subscription;
   constructor() {
     this.nomiSpettacoli = new Array();
   }
+  inInput($event) {}
   vediSpettacoli() {
     this.showNomi = true;
   }
