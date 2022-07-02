@@ -12,6 +12,10 @@ export class GestioneComponent implements OnInit {
   @Output() spettacoliChange = new EventEmitter();
   nomiSpettacoli: Array<string>;
   nomeSpettacolo: string;
+  filePlatea: string;
+  postiPlatea: string;
+  filePalco: string;
+  postiPalco: string;
   showNomi: boolean;
   sub: Subscription;
   constructor() {
