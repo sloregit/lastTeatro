@@ -94,7 +94,7 @@ export class SalaTeatroComponent implements OnInit {
   }
   //invocata subito dopo il caricamento del component
   ngOnInit() {
-    this.spettacolo.subscribe((spettacolo: Spettacolo) => {
+    this.sub = this.spettacolo.subscribe((spettacolo: Spettacolo) => {
       this.platea = spettacolo.teatro.platea;
       this.palco = spettacolo.teatro.palco;
     });

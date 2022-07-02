@@ -1,6 +1,9 @@
-<button (click)="vediSpettacoli()">Spettacoli</button>
-<button (click)="nascondi()">Nascondi</button>
-<div *ngFor="let spettacolo of nomiSpettacoli">
-  <p>{{ spettacolo }}</p>
+<button *ngIf="!showNomi" (click)="vediSpettacoli()">Spettacoli</button>
+<div *ngIf="showNomi">
+  <button (click)="nascondi()">Nascondi</button>
+  <div *ngFor="let spettacolo of nomiSpettacoli">
+    <p>{{ spettacolo }}</p>
+  </div>
 </div>
+
 <button>indietro</button>

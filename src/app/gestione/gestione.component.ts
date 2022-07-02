@@ -11,22 +11,24 @@ export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
   @Output() spettacoliChange = new EventEmitter();
   nomiSpettacoli: Array<string>;
+  showNomi: boolean;
   sub: Subscription;
   constructor() {
     this.nomiSpettacoli = new Array();
   }
   vediSpettacoli() {
+    this.showNomi = true;
+  }
+  nascondi() {
+    this.showNomi = false;
+  }
+  ngOnInit() {
     this.sub = this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
       spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });
-    console.log(this.nomiSpettacoli);
   }
-  nascondi() {
-    this.nomiSpettacoli = undefined;
-  }
-  ngOnInit() {}
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

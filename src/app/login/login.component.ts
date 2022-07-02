@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   @Output() spettacoloSceltoChange = new EventEmitter<string>();
   @Output() nomeUtenteChange = new EventEmitter<string>();
   nomiSpettacoli: Array<string>;
-
+  sub: Subscription;
   logged: boolean;
   constructor() {
     this.nomiSpettacoli = new Array();
@@ -27,10 +27,13 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     //filtra e inserisce nell'array solo i nomi degli spettacoli
-    this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
+    this.sub = this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
       spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

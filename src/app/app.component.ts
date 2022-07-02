@@ -80,9 +80,11 @@ export class AppComponent {
   inizio() {
     this.spettacoliIn$ = undefined;
     this.rapido = undefined;
+    this.sub.unsubscribe();
   }
   //torna da teatro --> a login
   indietro() {
+    this.spettacoloScelto = undefined;
     this.spettacolo = undefined;
     this.rapido = undefined;
     this.nomeUtente = undefined;
