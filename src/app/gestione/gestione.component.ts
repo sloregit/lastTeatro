@@ -22,7 +22,7 @@ export class nuovoSpettacolo extends Spettacolo {
       .map(() =>
         Array(postiPlatea)
           .fill('posto')
-          .map((val, posto) => {
+          .map(() => {
             return undefined;
           })
       );
@@ -31,7 +31,7 @@ export class nuovoSpettacolo extends Spettacolo {
       .map(() =>
         Array(postipalco)
           .fill('posto')
-          .map((val, posto) => {
+          .map(() => {
             return undefined;
           })
       );

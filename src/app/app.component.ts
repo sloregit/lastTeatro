@@ -1,4 +1,4 @@
-import { Component, VERSION } from '@angular/core';
+import { Component } from '@angular/core';
 import { TeatroDBService } from './teatro-db.service';
 import { Observable, of, map, Subscription } from 'rxjs';
 
