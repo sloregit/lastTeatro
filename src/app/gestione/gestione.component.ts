@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
 @Component({
@@ -11,11 +11,12 @@ export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
   @Output() spettacoliChange = new EventEmitter();
   nomiSpettacoli: Array<string>;
+  sub: Subscription;
   constructor() {
     this.nomiSpettacoli = new Array();
   }
   vediSpettacoli() {
-    this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
+    this.sub = this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
       spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
@@ -26,4 +27,7 @@ export class GestioneComponent implements OnInit {
     this.nomiSpettacoli = undefined;
   }
   ngOnInit() {}
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
