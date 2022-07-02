@@ -50,7 +50,7 @@ export class SalaTeatroComponent implements OnInit {
   newPrenotazione: Prenotazione;
   prenotaGruppo: Selezione;
   selezionato: boolean;
-  subscription: Subscription;
+  sub: Subscription;
   constructor() {
     if (!this.rapido) {
       this.prenotaGruppo = new Selezione();
@@ -59,7 +59,7 @@ export class SalaTeatroComponent implements OnInit {
 
   //mappa i selezionati e aggiorna lo spettacolo
   confermaPrenotazioni() {
-    this.subscription = this.spettacolo.subscribe((spettacolo: Spettacolo) => {
+    this.sub = this.spettacolo.subscribe((spettacolo: Spettacolo) => {
       this.prenotaGruppo.selezionati.map(
         (prenotazione: Prenotazione) =>
           (spettacolo.teatro[prenotazione.zona][prenotazione.fila][
@@ -81,7 +81,7 @@ export class SalaTeatroComponent implements OnInit {
   }
   //prenotazione Veloce
   prenotaVeloce(zona: string, fila: number, posto: number) {
-    this.subscription = this.spettacolo.subscribe(
+    this.sub = this.spettacolo.subscribe(
       (spettacolo: Spettacolo) =>
         (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
     );
@@ -98,5 +98,8 @@ export class SalaTeatroComponent implements OnInit {
       this.platea = spettacolo.teatro.platea;
       this.palco = spettacolo.teatro.palco;
     });
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
