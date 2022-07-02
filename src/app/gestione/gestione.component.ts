@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
@@ -9,6 +9,7 @@ import { Spettacolo } from '../app.component';
 })
 export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
+  @Output() spettacoliChange = new EventEmitter();
   nomiSpettacoli: Array<string>;
   constructor() {
     this.nomiSpettacoli = new Array();

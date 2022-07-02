@@ -35,7 +35,7 @@
   ></app-sala-teatro>
 </div>
 <div *ngIf="admin && spettacoliIn$">
-  <app-gestione [spettacoli]="spettacoliIn$"></app-gestione>
+  <app-gestione [(spettacoli)]="spettacoliIn$"></app-gestione>
 </div>
 <button *ngIf="spettacoliIn$ && !spettacolo" (click)="inizio()">
   indietro
