@@ -50,6 +50,10 @@ export class GestioneComponent implements OnInit {
   newSpettacolo: nuovoSpettacolo;
   nomiSpettacoli: Array<string>;
   nomeSpettacolo: string;
+  filePlateaMax;
+  postiPlateaMax;
+  filePalchiMax;
+  postiPalchiMax;
   elemPlatea: Array<number>;
   elemPalco: Array<number>;
   filePlatea: number;
@@ -60,8 +64,10 @@ export class GestioneComponent implements OnInit {
   sub: Subscription;
   constructor() {
     this.nomiSpettacoli = new Array();
-    this.elemPlatea = new Array(10);
-    this.elemPalco = new Array(10);
+    this.filePlateaMax = new Array(7);
+    this.postiPlateaMax = new Array(10);
+    this.filePalchiMax = new Array(6);
+    this.postiPalchiMax = new Array(4);
   }
   conferma() {
     this.newSpettacolo = new nuovoSpettacolo(this.nomeSpettacolo);
