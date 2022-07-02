@@ -1,10 +1,10 @@
 import { Component, VERSION } from '@angular/core';
 import { TeatroDBService } from './teatro-db.service';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, Subscription } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
-  teatro: Teatro; 
+  teatro: Teatro;
 }
 export class Teatro {
   platea: Array<Array<string>>;
@@ -24,7 +24,7 @@ export class AppComponent {
   spettacolo: Observable<Spettacolo>;
   rapido: boolean;
   conferma: string;
-
+  sub: Subscription;
   constructor(private TeatroDBService: TeatroDBService) {}
 
   foo2() {
@@ -38,7 +38,7 @@ export class AppComponent {
   //prenota al click
   spettacoloChange() {
     //OK
-    this.spettacoliIn$.subscribe((spettacoli: Array<Spettacolo>) =>
+    this.sub = this.spettacoliIn$.subscribe((spettacoli: Array<Spettacolo>) =>
       this.TeatroDBService.SetPrenotazioni$(
         JSON.stringify(spettacoli)
       ).subscribe(
@@ -57,7 +57,7 @@ export class AppComponent {
         )
       )
     );
-    spettacoloObs$.subscribe({
+    this.sub = spettacoloObs$.subscribe({
       next: (spettacolo: Spettacolo[]) =>
         (this.spettacolo = new Observable((subscriber) =>
           subscriber.next(spettacolo[0])
@@ -68,7 +68,7 @@ export class AppComponent {
   //recupera i dati dal server
   getDati(admin: boolean) {
     this.admin = admin;
-    this.TeatroDBService.getPrenotazioni$().subscribe({
+    this.sub = this.TeatroDBService.getPrenotazioni$().subscribe({
       next: (res: string) => {
         this.spettacoliIn$ = of(JSON.parse(res));
       },
