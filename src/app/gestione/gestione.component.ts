@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Spettacolo } from '../app.component';
+import { Spettacolo, Teatro } from '../app.component';
 
 @Component({
   selector: 'app-gestione',
@@ -10,16 +10,25 @@ import { Spettacolo } from '../app.component';
 export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
   @Output() spettacoliChange = new EventEmitter();
+  teatro: Teatro;
   nomiSpettacoli: Array<string>;
   nomeSpettacolo: string;
-  filePlatea: string;
-  postiPlatea: string;
-  filePalco: string;
-  postiPalco: string;
+  elemPlatea: Array<number>;
+  elemPalco: Array<number>;
+  filePlatea: number;
+  postiPlatea: number;
+  filePalco: number;
+  postiPalco: number;
   showNomi: boolean;
   sub: Subscription;
   constructor() {
     this.nomiSpettacoli = new Array();
+    this.elemPlatea = new Array(10);
+    this.elemPalco;
+  }
+  seleziona() {
+    console.log(typeof this.filePlatea);
+    console.log(this.filePlatea);
   }
   inInput($event) {
     console.log($event.target.value);
