@@ -76,6 +76,7 @@ export class AppComponent {
     this.sub = this.TeatroDBService.getPrenotazioni$().subscribe({
       next: (res: string) => {
         this.spettacoliIn$ = of(JSON.parse(res));
+        console.log(JSON.parse(res));
       },
       error: (e) =>
         console.error('Observer got an error: ' + JSON.stringify(e)),
